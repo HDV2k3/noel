@@ -145,7 +145,7 @@ const ChristmasVideoPage = () => {
       </main>
 
       <footer className="bg-green-800 text-white text-center p-4 mt-8">
-        <p>&copy; 2024 VietDev. All rights reserved.</p>
+        <p>&copy; 2024 Merry Christmas VietDev. All rights reserved.</p>
       </footer>
 
       {/* Custom animations */}
