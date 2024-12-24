@@ -69,7 +69,7 @@ const ChristmasVideoPage = () => {
 
       <header className="bg-green-800 p-4 text-center">
         <h1 className="text-4xl font-bold text-white mb-2">
-          Merry Christmas 12C2 2018 - 2025🎄🎄🎄
+          Merry Christmas 🎄🎄🎄
         </h1>
         <p className="text-white text-lg">
           Chào mừng đến với không khí Giáng sinh🎄🎄🎄
