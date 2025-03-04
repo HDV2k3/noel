@@ -103,26 +103,46 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.card}>
           <div className={styles.header}>
-            <div className={styles.logo}>
+            <div className={styles.logoContainer}>
               <Image
-                src="/images.png" // Fixed image path - adjust to your correct path
+                src="/images.png"
                 alt="UEH Logo"
-                width={80}
-                height={80}
+                width={100}
+                height={100}
                 priority
+                className={styles.uehLogo}
               />
             </div>
-            <h1 className={styles.title}>Lễ Tốt Nghiệp</h1>
-            <h2 className={styles.subtitle}>Quý Quỳnh</h2>
-            <p className={styles.degree}>Cử nhân Quản trị Kinh doanh</p>
-            <p className={styles.university}>
-              Trường Đại học Kinh tế TP.HCM (UEH University)
-            </p>
+
+            <div className={styles.graduationTitle}>
+              <h1 className={styles.title}>Lễ Tốt Nghiệp</h1>
+            </div>
+
+            <div className={styles.graduateContainer}>
+              <div className={styles.graduatePhoto}>
+                <Image
+                  src="/quynh.jpg"
+                  alt="Quý Quỳnh"
+                  width={180}
+                  height={180}
+                  priority
+                  className={styles.photoRounded}
+                />
+              </div>
+
+              <div className={styles.graduateName}>
+                <h2 className={styles.subtitle}>Quý Quỳnh</h2>
+                <p className={styles.degree}>Cử nhân Quản trị Kinh doanh</p>
+                <p className={styles.university}>
+                  Trường Đại học Kinh tế TP.HCM (UEH University)
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className={styles.content}>
             <div className={styles.message}>
-              <p>Helloooo bạn Việt </p>
+              <p>Helloooo bạn iu </p>
               <p>
                 Sau khoảng thời gian gần 4 năm học tập, làm việc và trải nghiệm
                 tại UEH, sắp tới đây mình là Quý Quỳnh sẽ chính thức tốt nghiệp
@@ -135,7 +155,7 @@ export default function Home() {
                 trình phát triển của Quý Quỳnh.
               </p>
               <p>
-                Vì thế Quý Quỳnh xin trân trọng mời Việt đến tham gia Lễ tốt
+                Vì thế Quý Quỳnh xin trân trọng mời bạn iu đến tham gia Lễ tốt
                 nghiệp của mình với thông tin chi tiết sau đây:
               </p>
             </div>
@@ -190,7 +210,7 @@ export default function Home() {
 
             <div className={styles.closing}>
               <p>
-                Sự tham gia của Việt ngày hôm ấy là niềm vinh dự và hạnh phúc to
+                Sự tham gia của bạn ngày hôm ấy là niềm vinh dự và hạnh phúc to
                 lớn của Quý Quỳnh.
               </p>
               <p className={styles.finalMessage}>
