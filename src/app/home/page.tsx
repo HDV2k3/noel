@@ -143,6 +143,7 @@ export default function Home() {
           <div className={styles.content}>
             <div className={styles.message}>
               <p>Helloooo bạn iu </p>
+              <p>Helloooo bạn iu!!! </p>
               <p>
                 Sau khoảng thời gian gần 4 năm học tập, làm việc và trải nghiệm
                 tại UEH, sắp tới đây mình là Quý Quỳnh sẽ chính thức tốt nghiệp
