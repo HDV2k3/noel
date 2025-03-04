@@ -1,173 +1,209 @@
+// pages/index.js
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { Trees, Gift, Star, Snowflake, BellRing } from "lucide-react";
+import Head from "next/head";
+import { useState, useEffect } from "react";
+import styles from "../../../styles/Home.module.css"; // Fixed path to styles
+import Image from "next/image";
+import dynamic from "next/dynamic";
 
-const ChristmasVideoPage = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [showWelcome, setShowWelcome] = useState(true);
-
-  const startExperience = async () => {
-    if (audioRef.current && videoRef.current) {
-      try {
-        await Promise.all([videoRef.current.play(), audioRef.current.play()]);
-        setShowWelcome(false);
-      } catch (error) {
-        console.error("Error starting media:", error);
-      }
-    }
-  };
+// Component for countdown
+const CountdownComponent = () => {
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const videoElement = videoRef.current;
-    const audioElement = audioRef.current;
+    // Set mounted to true once component mounts on client
+    setMounted(true);
 
-    if (videoElement) {
-      const handleVideoEnded = () => {
-        videoElement.play().catch(console.error);
-      };
-      videoElement.addEventListener("ended", handleVideoEnded);
-      return () => videoElement.removeEventListener("ended", handleVideoEnded);
-    }
+    const target = new Date("2025-03-20T10:30:00");
 
-    if (audioElement) {
-      const handleAudioEnded = () => {
-        audioElement.play().catch(console.error);
-      };
-      audioElement.addEventListener("ended", handleAudioEnded);
-      return () => audioElement.removeEventListener("ended", handleAudioEnded);
-    }
+    const updateCountdown = () => {
+      const now = new Date();
+      const difference = target.getTime() - now.getTime();
+
+      if (difference > 0) {
+        const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const h = Math.floor(
+          (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+        setCountdown({ days: d, hours: h, minutes: m, seconds: s });
+      }
+    };
+
+    // Update immediately
+    updateCountdown();
+
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
+  // Only render the content after client-side hydration
+  if (!mounted) {
+    return null;
+  }
+
   return (
-    <div className="min-h-screen bg-red-900 relative">
-      {showWelcome && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center">
-          <div className="text-center text-white p-8 rounded-lg bg-green-800/50 backdrop-blur-sm">
-            <h2 className="text-4xl font-bold mb-4">
-              Giáng sinh vui vẻ nhé !!!🎄🎄🎄
-            </h2>
-            <p className="mb-6 text-lg">
-              Chào mừng đến với không khí Giáng sinh🎄🎄🎄
-            </p>
-            <button
-              onClick={startExperience}
-              className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full text-xl transition-colors duration-300 animate-pulse"
-            >
-              Start Christmas 🎄🎄🎄
-            </button>
-          </div>
-        </div>
-      )}
-
-      <audio ref={audioRef} loop preload="auto">
-        <source
-          src="/iLoveYt.net_YouTube_Last-Christmas-Remix-Merry-Christmas-Nha_Media_utZDbZ8n8M4_008_128k.mp3"
-          type="audio/mpeg"
-        />
-      </audio>
-
-      <header className="bg-green-800 p-4 text-center">
-        <h1 className="text-4xl font-bold text-white mb-2">
-          Merry Christmas 🎄🎄🎄
-        </h1>
-        <p className="text-white text-lg">
-          Chào mừng đến với không khí Giáng sinh🎄🎄🎄
-        </p>
-      </header>
-
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-12 gap-4">
-          {/* Left Decorations */}
-          <div className="col-span-2 flex flex-col items-center gap-8">
-            <div className="animate-bounce">
-              <Star size={48} className="text-yellow-300" />
-            </div>
-            <div className="relative h-48">
-              <Trees
-                size={48}
-                className="text-green-500 absolute animate-pulse"
-              />
-              <Gift
-                size={32}
-                className="text-red-400 absolute top-32 left-4 animate-bounce"
-              />
-            </div>
-            <BellRing size={48} className="text-yellow-400 animate-swing" />
-            <Snowflake size={32} className="text-white animate-spin-slow" />
-          </div>
-
-          {/* Video container */}
-          <div className="col-span-8">
-            <div className="relative rounded-lg overflow-hidden shadow-2xl">
-              <video
-                ref={videoRef}
-                className="w-full h-full object-cover"
-                muted
-                playsInline
-                loop
-              >
-                <source src="/1.mp4" type="video/mp4" />
-                Trình duyệt của bạn không hỗ trợ video tag.
-              </video>
-            </div>
-
-            <div className="mt-8 text-center text-white">
-              <h2 className="text-2xl font-semibold mb-4">
-                Không khí Giáng sinh an lành
-              </h2>
-              <p className="text-lg">
-                Hãy cùng tận hưởng những khoảnh khắc ấm áp của mùa Giáng sinh
-                với gia đình và những người thân yêu.
-              </p>
-            </div>
-          </div>
-
-          {/* Right Decorations */}
-          <div className="col-span-2 flex flex-col items-center gap-8">
-            <div className="animate-bounce">
-              <Star size={48} className="text-yellow-300" />
-            </div>
-            <div className="relative h-48">
-              <Trees
-                size={48}
-                className="text-green-500 absolute animate-pulse"
-              />
-              <Gift
-                size={32}
-                className="text-red-400 absolute top-32 right-4 animate-bounce"
-              />
-            </div>
-            <BellRing size={48} className="text-yellow-400 animate-swing" />
-            <Snowflake size={32} className="text-white animate-spin-slow" />
-          </div>
-        </div>
-      </main>
-
-      <footer className="bg-green-800 text-white text-center p-4 mt-8">
-        <p>&copy; 2024 Merry Christmas VietDev. All rights reserved.</p>
-      </footer>
-
-      {/* Custom animations */}
-      <style jsx global>{`
-        @keyframes swing {
-          0%,
-          100% {
-            transform: rotate(-10deg);
-          }
-          50% {
-            transform: rotate(10deg);
-          }
-        }
-        .animate-swing {
-          animation: swing 2s infinite;
-        }
-        .animate-spin-slow {
-          animation: spin 3s linear infinite;
-        }
-      `}</style>
+    <div className={styles.countdownBoxes}>
+      <div className={styles.countdownBox}>
+        <div className={styles.countdownNumber}>{countdown.days}</div>
+        <div className={styles.countdownLabel}>Ngày</div>
+      </div>
+      <div className={styles.countdownBox}>
+        <div className={styles.countdownNumber}>{countdown.hours}</div>
+        <div className={styles.countdownLabel}>Giờ</div>
+      </div>
+      <div className={styles.countdownBox}>
+        <div className={styles.countdownNumber}>{countdown.minutes}</div>
+        <div className={styles.countdownLabel}>Phút</div>
+      </div>
+      <div className={styles.countdownBox}>
+        <div className={styles.countdownNumber}>{countdown.seconds}</div>
+        <div className={styles.countdownLabel}>Giây</div>
+      </div>
     </div>
   );
 };
 
-export default ChristmasVideoPage;
+// Dynamically import the countdown component with SSR disabled
+const DynamicCountdown = dynamic(() => Promise.resolve(CountdownComponent), {
+  ssr: false,
+});
+
+export default function Home() {
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Lễ Tốt Nghiệp Của Quý Quỳnh | UEH University</title>
+        <meta
+          name="description"
+          content="Thư mời tham dự lễ tốt nghiệp của Quý Quỳnh tại UEH University"
+        />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+
+      <main className={styles.main}>
+        <div className={styles.card}>
+          <div className={styles.header}>
+            <div className={styles.logo}>
+              <Image
+                src="/images.png" // Fixed image path - adjust to your correct path
+                alt="UEH Logo"
+                width={80}
+                height={80}
+                priority
+              />
+            </div>
+            <h1 className={styles.title}>Lễ Tốt Nghiệp</h1>
+            <h2 className={styles.subtitle}>Quý Quỳnh</h2>
+            <p className={styles.degree}>Cử nhân Quản trị Kinh doanh</p>
+            <p className={styles.university}>
+              Trường Đại học Kinh tế TP.HCM (UEH University)
+            </p>
+          </div>
+
+          <div className={styles.content}>
+            <div className={styles.message}>
+              <p>Helloooo bạn Việt </p>
+              <p>
+                Sau khoảng thời gian gần 4 năm học tập, làm việc và trải nghiệm
+                tại UEH, sắp tới đây mình là Quý Quỳnh sẽ chính thức tốt nghiệp
+                chặng đường Đại học này.
+              </p>
+              <p>
+                Ngay bây giờ Quý Quỳnh rất mong chờ và vui mừng nếu có thể được
+                chia sẻ những khoảnh khắc háp pi này cùng mọi người ở ngày lễ vô
+                cùng quan trọng để đánh dấu một cột mốc đáng nhớ trong hành
+                trình phát triển của Quý Quỳnh.
+              </p>
+              <p>
+                Vì thế Quý Quỳnh xin trân trọng mời Việt đến tham gia Lễ tốt
+                nghiệp của mình với thông tin chi tiết sau đây:
+              </p>
+            </div>
+
+            <div className={styles.details}>
+              <div className={styles.detailItem}>
+                <div className={styles.icon}>📅</div>
+                <div className={styles.detailContent}>
+                  <h3>Thời gian</h3>
+                  <p>10h30 20/03/2025 (Thứ Năm)</p>
+                </div>
+              </div>
+
+              <div className={styles.detailItem}>
+                <div className={styles.icon}>📍</div>
+                <div className={styles.detailContent}>
+                  <h3>Địa điểm</h3>
+                  <p>
+                    UEH cơ sở A - 59C Nguyễn Đình Chiểu, Phường 6, Quận 3,
+                    TP.HCM
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.detailItem}>
+                <div className={styles.icon}>🅿️</div>
+                <div className={styles.detailContent}>
+                  <h3>Nơi gửi xe</h3>
+                  <p>
+                    Xung quanh khu vực hồ con rùa (hoặc đi bằng phương tiện khác
+                    vì hôm í sẽ rất đông khó gửi và lấy xe)
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.detailItem}>
+                <div className={styles.icon}>📱</div>
+                <div className={styles.detailContent}>
+                  <h3>Liên hệ</h3>
+                  <p>
+                    SĐT/Zalo để tìm kiếm Quý Quỳnh giữa dòng đời tấp nập:
+                    0764655997
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.countdown}>
+              <h3>Đếm ngược đến ngày vui</h3>
+              <DynamicCountdown />
+            </div>
+
+            <div className={styles.closing}>
+              <p>
+                Sự tham gia của Việt ngày hôm ấy là niềm vinh dự và hạnh phúc to
+                lớn của Quý Quỳnh.
+              </p>
+              <p className={styles.finalMessage}>
+                Hẹn gặp lại trong ngày vui của Quý Quỳnh nhé! ❤️
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer className={styles.footer}>
+        <p>© 2025 Quý Quỳnh - UEH University</p>
+      </footer>
+    </div>
+  );
+}

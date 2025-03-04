@@ -1,0 +1,242 @@
+/* styles/Home.module.css */
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.header {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: white;
+  border-radius: 100% 100% 0 0;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  padding: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.logo img {
+  width: 100%;
+  height: auto;
+}
+
+.title {
+  font-family: "Dancing Script", cursive;
+  font-size: 3.5rem;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+  font-family: "Dancing Script", cursive;
+  font-size: 2.5rem;
+  margin: 0.5rem 0 1rem;
+  font-weight: 700;
+}
+
+.degree {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  font-weight: 500;
+}
+
+.university {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  opacity: 0.9;
+}
+
+.content {
+  padding: 3rem 2rem 2rem;
+}
+
+.message {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  color: #444;
+}
+
+.message p {
+  margin-bottom: 1rem;
+}
+
+.details {
+  background: rgba(234, 236, 244, 0.5);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.detailItem {
+  display: flex;
+  margin-bottom: 1.2rem;
+}
+
+.detailItem:last-child {
+  margin-bottom: 0;
+}
+
+.icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  min-width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detailContent h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+  color: #2575fc;
+}
+
+.detailContent p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.countdown {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.countdown h3 {
+  color: #2575fc;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.countdownBoxes {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.countdownBox {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  border-radius: 10px;
+  padding: 0.8rem;
+  min-width: 80px;
+  box-shadow: 0 5px 15px rgba(37, 117, 252, 0.2);
+}
+
+.countdownNumber {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.countdownLabel {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.closing {
+  text-align: center;
+  margin-top: 2rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+.finalMessage {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  color: #6a11cb;
+  font-weight: 700;
+}
+
+.footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  color: #666;
+  font-size: 0.8rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 2rem;
+  }
+
+  .countdownBoxes {
+    flex-wrap: wrap;
+  }
+
+  .countdownBox {
+    min-width: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 2rem 1rem;
+  }
+
+  .content {
+    padding: 2rem 1rem 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+
+  .countdownBox {
+    min-width: 60px;
+    padding: 0.6rem;
+  }
+
+  .countdownNumber {
+    font-size: 1.5rem;
+  }
+}
